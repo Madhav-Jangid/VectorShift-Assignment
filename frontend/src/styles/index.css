@@ -1,0 +1,277 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', Menlo, monospace;
+
+  --bg: #FFFEFB;
+  --card: #FFFFFF;
+  --surface: #FBF9F4;
+  --surface-2: #F5F2EA;
+
+  --border: #E4DDD0;
+  --border-2: #D9D3C5;
+
+  --ink: #0F131A;
+  --ink-2: #54585F;
+  --muted: #7A746C;
+  --dim: #B0A898;
+
+  --accent: #5B4824;
+  --accent-dim: rgba(91, 72, 36, 0.1);
+  --accent-text: #FFFFFF;
+
+  --canvas-bg: #DEDAD2;
+  --grid-color: #E4DDD0;
+
+  --node-bg: #FFFFFF;
+  --node-header-bg: #FDFCF9;
+  --node-border: #E4DDD0;
+  --node-ink: #0F131A;
+  --node-muted: #7A746C;
+  --node-input-bg: #F9F7F2;
+  --node-input-border: #DDD8CC;
+  --node-shadow: 0 1px 4px rgba(15, 19, 26, 0.06);
+  --node-shadow-hover: 0 4px 20px rgba(15, 19, 26, 0.1);
+
+  --ctrl-bg: #FFFFFF;
+  --ctrl-border: #E4DDD0;
+  --ctrl-ink: #0F131A;
+  --ctrl-muted: #7A746C;
+  --ctrl-hover: #F5F2EA;
+
+  --modal-bg: #FFFFFF;
+  --modal-border: #E4DDD0;
+  --modal-ink: #0F131A;
+  --modal-muted: #7A746C;
+  --modal-stat-bg: #FBF9F4;
+  --modal-stat-border: #E4DDD0;
+
+  --edge-color: #A89B87;
+  --edge-color-hover: #7A6C5A;
+
+  --focus-ring: rgba(91, 72, 36, 0.15);
+}
+
+[data-theme="dark"] {
+  --bg: #171717;
+  --card: #0a0a0a;
+  --surface: #111111;
+  --surface-2: #161616;
+
+  --border: #1a1a1a;
+  --border-2: #242424;
+
+  --ink: #ededed;
+  --ink-2: #888888;
+  --muted: #555555;
+  --dim: #333333;
+
+  --accent: #E8703A;
+  --accent-dim: rgba(232, 112, 58, 0.12);
+  --accent-text: #000000;
+
+  --canvas-bg: #050505;
+  --grid-color: #0d0d0d;
+
+  --node-bg: #0d0d0f;
+  --node-header-bg: #111113;
+  --node-border: #1c1c1e;
+  --node-ink: #dedede;
+  --node-muted: #505056;
+  --node-input-bg: #080808;
+  --node-input-border: #1a1a1a;
+  --node-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+  --node-shadow-hover: 0 6px 32px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.5);
+
+  --ctrl-bg: #0a0a0a;
+  --ctrl-border: #1a1a1a;
+  --ctrl-ink: #ededed;
+  --ctrl-muted: #555555;
+  --ctrl-hover: #161616;
+
+  --modal-bg: #0a0a0a;
+  --modal-border: #1a1a1a;
+  --modal-ink: #ededed;
+  --modal-muted: #555555;
+  --modal-stat-bg: #111111;
+  --modal-stat-border: #1c1c1c;
+
+  --edge-color: #484854;
+  --edge-color-hover: #7272a0;
+
+  --focus-ring: rgba(232, 112, 58, 0.2);
+}
+
+@layer components {
+  .node-field {
+    @apply flex items-center gap-[7px];
+  }
+
+  .node-label {
+    @apply text-[9px] text-node-muted font-mono font-medium uppercase tracking-[0.08em] min-w-[32px] shrink-0;
+  }
+
+  .node-input {
+    @apply flex-1 bg-node-input text-node-ink text-xs px-[7px] py-1 w-full font-sans rounded-[3px] outline-none transition-colors duration-100;
+    border: 1px solid var(--node-input-border);
+  }
+
+  .node-select {
+    @apply flex-1 bg-node-input text-node-ink text-xs px-[7px] py-1 w-full font-sans cursor-pointer rounded-[3px] outline-none transition-colors duration-100;
+    border: 1px solid var(--node-input-border);
+  }
+
+  .node-textarea {
+    @apply bg-node-input text-node-ink text-xs px-[7px] py-[5px] w-full block font-sans resize-none leading-[1.55] overflow-y-hidden rounded-[3px] outline-none transition-colors duration-100;
+    border: 1px solid var(--node-input-border);
+  }
+}
+
+.vs-node {
+  transition: box-shadow 0.15s ease, transform 0.12s ease;
+}
+
+.vs-node:hover {
+  box-shadow: var(--node-shadow-hover) !important;
+  transform: translateY(-1px);
+}
+
+.react-flow__node.selected .vs-node {
+  box-shadow: 0 0 0 1.5px var(--accent), var(--node-shadow-hover) !important;
+  transform: none;
+}
+
+.react-flow__node.dragging .vs-node {
+  transition: none !important;
+  transform: none !important;
+}
+
+.vs-canvas-tool-select .react-flow__pane {
+  cursor: default;
+}
+
+.vs-canvas-tool-grab .react-flow__pane {
+  cursor: grab;
+}
+
+.vs-canvas-tool-grab .react-flow__node,
+.vs-canvas-tool-grab .react-flow__edge {
+  cursor: default;
+}
+
+.vs-canvas-tool-grab .react-flow__handle {
+  cursor: crosshair;
+}
+
+.vs-canvas-tool-grab.vs-canvas-grabbing .react-flow__pane {
+  cursor: grabbing;
+}
+
+.vs-canvas-tool-multiselect .react-flow__pane {
+  cursor: crosshair;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px var(--focus-ring) !important;
+  outline: none;
+}
+
+.react-flow__edge-path {
+  stroke: var(--edge-color);
+  stroke-width: 2;
+}
+
+.react-flow__edge.selected .react-flow__edge-path,
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: var(--edge-color-hover);
+  stroke-width: 2.5;
+}
+
+.react-flow__connection-path {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+.react-flow__attribution {
+  display: none;
+}
+
+@keyframes edgeShine {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+@keyframes ctxSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bentoIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-2);
+  border-radius: 2px;
+}
+
+.react-flow__handle {
+  transition: transform 0.1s ease;
+}
+
+.react-flow__handle:hover {
+  transform: scale(1.4);
+}
+
+.react-flow__nodesselection-rect,
+.react-flow__selection {
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+}
