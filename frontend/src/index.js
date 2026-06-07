@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './resizeObserverFix';
 import './styles/index.css';
 import App from './app/App';
 
